@@ -3,7 +3,7 @@ CAD
 SoftDev
 Random Selection of Devos
 2024-09-13
-time spend: """
+time spent: 1 period"""
 
 import random
 
