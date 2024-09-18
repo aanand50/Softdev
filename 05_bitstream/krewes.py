@@ -22,7 +22,7 @@ def randomDevo():
    choice = random.randint(0, len(krewes)-1)
    devo = krewes[choice]
    print(devo["devo"] + " " + devo["pd"] + " " + devo["ducky"])
- createList()
+createList()
 
 
 randomDevo()
