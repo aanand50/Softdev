@@ -3,27 +3,29 @@ CA
 SoftDev
 K06: Divine your Destiny (dictionary from csv file)
 2024-09-19
-time spent: """
+time spent: 1 hour"""
 
+import csv #used for reading csv
 import random
-d = {}
-nums = []
+d = {} #create dictionary
 
 
 def createList():
-   List = open("occupations.csv", "r") #opens text file with read permissions
-   ind = List.read().split("\n") #splits into list of occupations and their percentages
-   for ppl in ind: 
-       info = ppl.split(",") #splits into occupation and percent
-       d[info[0]] = info[1] #list created
-   nums.append(d[0][1])
-   for i in range(1, len(d)):
-           nums.append(d[i][1] + nums[i-1])
-   print (nums)
+ with open('occupations.csv', newline='') as csvfile: # reads csv file
+    l = csv.reader(csvfile)
+    for row in l:
+        if (row[0] != 'Job Class') and (row[0] != 'Total'):
+            #print(row[0])
+            #print(row[1])
+            d.update({row[0]:float(row[1])})
        
-def randomDevo():
-   choice = random.randint(0, 1000) #random number in range 0 to length
-   for i in range(0, len(d)):
-       o = d[0][1] * 10 #choose random occupation
-       last = o
+def rand():
+    x = random.uniform(0.0,99.8)
+    #print(x)
+    for key, value in d.items():
+        x = x - value 
+        if x <= 0: #move on to next occupation if necessary
+            print(key)
+            break
 createList()
+rand()
