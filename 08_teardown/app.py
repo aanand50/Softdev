@@ -1,8 +1,9 @@
 """Aditya Anand
 SoftDev
-K08: 
+Team VAP (Aditya, Princedon, Vedant)
+K08: Learn more about flask and virtual environments
 2024-09-23
-time spent: 1 hour"""
+time spent: .8 hour"""
 
 '''
 DISCO:
