@@ -3,49 +3,43 @@
 # SoftDev
 # K13 <Occupations table format with links>
 # 2024-9-30
-# Time Spent : 1.2 Hour
+# Time Spent : 2 Hour
 
-import random
-import csv
-from flask import Flask
 
-app = Flask(__name__)
 
-def readfile(f):
-    d = {}
-    with open (f, 'r') as listfile:
-        reader = csv.reader(listfile)
-        next(reader)
-        for row in reader:
-            job = row[0]
-            if job == "Total":
-                continue
-            percent = float(row[1])
-            d[job] = percent
-    return d
-        
-        
-def sel(d):
-    return random.choices(list(d.keys()), weights=d.values(), k=1)[0]
+import csv, random
 
-@app.route("/")
+with open('data/occupations.csv', newline='') as csvfile: # reads the csv file using python's csv import
+    occupations = csv.reader(csvfile)
+    dict = {} # initatizes a new dictionary
+    usedDict = {}
+    for row in occupations:
+        if (row[0] != 'Job Class') and (row[0] != 'Total'): # removes the first and last keys
+            dict.update({row[0]:[float(row[1]), row[2]]}) # updates the dictionary with the occupations as keys and a list containing the percentage and link as values.
+            usedDict.update({row[0]:[float(row[1]), row[2]]})
+        else:
+            dict.update({row[0]:[row[1], row[2]]})
+    
+from flask import Flask, render_template # render_template is an import from flask
+app = Flask(__name__) # assigns the Flask constructor to variable app
 
-def page():
-    occ = sel(readfile("data/occupations.csv"))
-    code = """
-    <!DOCTYPE html>
-    <html>
-      <body>
-            <p>CAY with Caden, Yinwei, Aditya.</p>
-            <h1>This time: """ + occ + """
-            </h1><h2>Occupations</h2>
-    """
-    for a, b, c in readfile("data/occupations.csv").items():
-        code += "<li>" + a + ": " + str(b) + ", Link: " + str(c) + "</li>"
+@app.route("/") # home route
+def starting_page():
+    return open('notes.txt', mode='r') # returns note.txt in the home route
 
-    code += "</body></html>"
-    return code
+@app.route("/wdywtbwygp") # the wdywtbwygp route gives a tabulated list of occupations, percentages, and a link to them. Also includes a random occupation.
+def occupations():
+    chosenOccupation = "Occupation of the Day: " # starting text for the random occupation.
+    ourTNPG = "GOOGle - Margie Cao, Jayden Zhang, Nafiyu Murtaza" # creates the TNPG
+    heading = "Below are links that describe each of most POPULAR occupations! We also provide a free occupation generator to get YOU started!!!" # description about the page
+    x = random.uniform(0.0,99.8) # random float from 0.0 to 99.8
+    for key, value in usedDict.items():
+        x = x - value[0] # each key has a range and this subtracts until it is chosen
+        if x <= 0:
+            chosenOccupation = chosenOccupation + key # adds the randomly selected occupation to the chosenOccupation variable
+            break
+    return render_template("tablified.html", title="Find the Occupation that Suits YOU!", ourTNPG=ourTNPG, chosenOccupation=chosenOccupation, descriptiveHeading=heading, newCollection=usedDict.items(), topAndBottom=dict, keys=list(dict.keys())) # constructs the HTML page using the parameters to update the HTML variables.
 
-if __name__ == "__main__":
-    app.debug = True
-    app.run()
+if __name__ == "__main__": 
+    app.debug = True # allows for constant refreshing
+    app.run() # runs the app
