@@ -28,14 +28,15 @@
     </h1>
 
 
-    <h3>
-      Enter something below to proceed.
-    </h3>
-    <form action="/auth">
-      <input type="text" name="username">
-      <input type="submit" name="sub1">
-    </form>
-    <br>
+    <form action="/resp" method="POST">
+      <div>
+          <label for="username">Name</label>
+          <input type="text" id="username" name="username">
+      </div>
+
+      <button type="submit">Submit</button>
+  </form>
+
   </body>
 
 </html>
