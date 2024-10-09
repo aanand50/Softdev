@@ -43,28 +43,17 @@ def disp_loginpage():
     return render_template( 'login.html' )
 
 
-#@app.route("/resp"  , methods=['GET' , 'POST'])#, 'POST'])
-#def respond():
- #   username = request.form['username']
-  #  return render_template('response.html', username=username, request="POST")
 
 @app.route('/resp', methods=['GET', 'POST'])
-def greetings_page():
-    if request.method == 'POST':
-        username = request.form['username']
-        requesttype = "POST"
-    else:
-        username = request.args.get('username')
-        requesttype = "GET"
+def respond():
+    username = request.form['username']
 
-    return render_template('response.html', username=username, request=requesttype)
+
+    return render_template('response.html', username=username, request="POST")
 
 if __name__ == '__main__':
     app.debug = True
     app.run()
 
     
-if __name__ == "__main__": #false if this file imported as module
-    #enable debugging, auto-restarting of server when this file is modified
-    app.debug = True 
-    app.run()
+
