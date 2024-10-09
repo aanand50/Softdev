@@ -1,6 +1,10 @@
-# Clyde 'Thluffy' Sinclair
-# SoftDev
-# October 2024
+'''
+SAD - Sascha, Aditya, Danny
+SoftDev
+K15 - Flask-Form - Using Flask and request
+2024 - 10 - 09
+Time Spent: 1 hour 
+'''
 
 # import conventions:
 # list most general first (standard python library)
@@ -11,49 +15,28 @@ from flask import Flask             #facilitate flask webserving
 from flask import render_template   #facilitate jinja templating
 from flask import request           #facilitate form submission
 
-
 #the conventional way:
 #from flask import Flask, render_template, request
 
 app = Flask(__name__)    #create Flask object
 
-
-'''
-trioTASK:
-~~~~~~~~~~~ BEFORE RUNNING THIS, ~~~~~~~~~~~~~~~~~~
-...read for understanding all of the code below.
- * Some will work as written;
- *  ...other sections will not. 
-
-TASK:
- Predict which.
- 1. Devise simple tests to isolate components/behaviors.
- 2. Execute your tests.
- 3. Process results.
- 4. Findings yield new ideas for more tests? Yes: do them.
-
-PROTIP: Insert your own in-line comments
- wherever they will help
-  your future self and/or current teammates
-   understand what is going on.
-'''
-
-@app.route("/" , methods=['GET'])#, 'POST'])
+@app.route("/", methods=['GET', 'POST'])
 def disp_loginpage():
     return render_template( 'login.html' )
 
 
+@app.route("/auth", methods=['GET', 'POST'])
+def authenticate():
+    if request.method == "POST":
+        username = request.form["username"]
+    else:
+        username = request.args["username"]
+    explanation = "The GET method retrieves data by appending parameters to the URL, making it suitable for search queries. On the other hand, POST  puts data into the request body. For this reason, we prefer to use POST."
+    return render_template('response.html', username=username, explanation=explanation, request=request.method) #response to a form submission
 
-@app.route('/resp', methods=['GET', 'POST'])
-def respond():
-    username = request.form['username']
-
-
-    return render_template('response.html', username=username, request="POST")
-
-if __name__ == '__main__':
-    app.debug = True
-    app.run()
 
     
-
+if __name__ == "__main__": #false if this file imported as module
+    #enable debugging, auto-restarting of server when this file is modified
+    app.debug = True 
+    app.run()
