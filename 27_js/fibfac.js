@@ -1,8 +1,7 @@
-//Team Phantom Tollbooth :: Clyde Sinclair, Fierce Dragon
-//SoftDev pd0
-//K27 - Basic functions in JavaScript
-//2025-01-06m
-
+;; Team AY: Aditya and Stella
+;; SoftDev pd5
+;; K27 - Basic functions in Scheme
+;; 2025-01-06m
 //JavaScript implementations of Day0 recursive Scheme functions
 
 //factorial:
