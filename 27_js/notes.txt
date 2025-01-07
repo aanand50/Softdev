@@ -1,0 +1,3 @@
+JS is similar formatting to Java
+Function instead of lambda
+Var or let instead of define
