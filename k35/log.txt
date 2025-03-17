@@ -2,6 +2,8 @@ Disco:
 q0: It took 2 main tries to get it right. Although there was a lot more communication with the chatbot, the first attempt was a lot of the same thing, trying to figure out errors with werkzeug and markup packages. In our second attempt, we instructed the chatbot to only use flask, which worked in our first try.
 q1: There were several errors in which the chatbot imported packages which it never used. We were able to solve this by telling it to only use flask.
 q2: The code is quite similar. Although the layout is different and it is much uglier, the tree is mostly the same.
+There were only 2 messages that resulted in milestones, the first was the message below minus the last line, and the second included the line "Use only the following in requirements.txt: flask==3.0.3". The output was the code.
+
 
 Scenario One: Your team has been contracted to create a collaborative storytelling game/website, with the following features:
 
